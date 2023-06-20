@@ -1,20 +1,147 @@
-﻿<button class="btn btn-primary" onclick="getEmployees()">getEmployees</button>
+﻿<button class="btn btn-primary" onclick="getEmployees()">所有員工紀錄</button>
 
+<input type="text" id="getEmployeeById" class="form-control" />
+<button class="btn btn-primary" onclick="getEmployeeById()">指定員工紀錄</button>
+<label id="employeesList"></label>
+
+<div>
+
+<label class="form-label">firstName</label>
+<input type="text" id="firstName" class="form-control" />
+<label class="form-label">lastName</label>
+<input type="text" id="lastName" class="form-control" />
+<label class="form-label">title</label>
+<input type="text" id="title" class="form-control" />
+<button class="btn btn-primary" onclick="insertEmployee()">新增員工紀錄</button>
+</div>
+
+<div>
+    <button class="btn btn-primary" onclick="updateEmployee()">修改員工紀錄</button>
+</div>
+
+<div>
+    <button class="btn btn-primary" onclick="deleteEmployee()">刪除員工紀錄</button>
+</div>
+
+<div id="employees"></div>
 
 @section Scripts{
     <script>
         var bassAddress = "https://localhost:7241";
+
+        //所有員工
         function getEmployees(){
             //alert("getEmployees");
             $.ajax({
                 type:"GET",
                 url: `${bassAddress}/api/Employees`
             }).done(function(data){
-                alert(data);
+                //JSON.stringify把JSON格式換成字串
+                //alert(JSON.stringify(data));
+                $("#employees").empty();
+                var str = "<ul>"
+                $.each(data,function(index,emp){
+                    str += "<li>"
+                    str+=`${emp.employeeID},${emp.firstName},${emp.lastName},${emp.title}`;
+                    str += "</li>"
+
+                });
+                str += "</ul>";
+                //資料更新在上面的div
+                $("#employees").html(str);
             }).fail(function(err){
                 alert(`${err.statusText}`);
             })
         }
 
+        //指定員工
+        function getEmployeeById() {
+            //alert("getEmployees");
+            $.ajax({
+                type: "GET",
+                url: `${bassAddress}/api/Employees/${$("#getEmployeeById").val()}`
+            }).done(function (data) {
+                //JSON.stringify把JSON格式換成字串
+                //alert(JSON.stringify(data))
+                var list = (JSON.stringify(data))
+                $("#employeesList").html(list);
+             
+            }).fail(function (err) {
+                alert(`${err.statusText}`);
+            })
+        }
+
+        //新增員工
+        function insertEmployee() {
+            //alert("getEmployees");
+            var firstName = $("#firstName").val();
+            var lastName = $("#lastName").val();
+            var title = $("#title").val()
+            var emp ={
+                EmployeeID : 0,
+                FirstName: firstName,
+                LastName: lastName,
+                Title: title
+            }
+            $.ajax({
+                type: "POST",
+                data:JSON.stringify(emp),
+                contentType:"application/json",
+                url: `${bassAddress}/api/Employees`
+            }).done(function (data) {
+                //JSON.stringify把JSON格式換成字串
+                alert(JSON.stringify(data))
+                
+
+            }).fail(function (err) {
+                alert(`${err.statusText}`);
+            })
+
+        }
+
+        //修改員工
+        function updateEmployee() {
+            //alert("getEmployees");
+            var firstName = $("#firstName").val();
+            var lastName = $("#lastName").val();
+            var title = $("#title").val()
+            var emp = {
+                EmployeeID: 26,
+                FirstName: "DAVID",
+                LastName: "LIU",
+                Title: "SSS"
+            }
+            $.ajax({
+                type: "PUT",
+                data: JSON.stringify(emp),
+                contentType: "application/json",
+                url: `${bassAddress}/api/Employees/26`
+            }).done(function (data) {
+                //JSON.stringify把JSON格式換成字串
+                alert(JSON.stringify(data))
+
+
+            }).fail(function (err) {
+                alert(`${err.statusText}`);
+            })
+
+        }
+
+        //刪除員工
+        function deleteEmployee() {
+            //alert("getEmployees");
+            $.ajax({
+                type: "DELETE",
+                url: `${bassAddress}/api/Employees/28`
+            }).done(function (data) {
+                //JSON.stringify把JSON格式換成字串
+                alert(JSON.stringify(data))
+
+
+            }).fail(function (err) {
+                alert(`${err.statusText}`);
+            })
+
+        }
     </script>
 }
