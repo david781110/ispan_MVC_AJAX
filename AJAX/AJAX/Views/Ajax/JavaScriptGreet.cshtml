@@ -1,0 +1,83 @@
+﻿<button class="btn btn-primary" onclick="getGreetSync()">getGreetSync</button>
+<button class="btn btn-primary" onclick="getGreetAsync()">getGreetAsync</button>
+<button class="btn btn-primary" onclick="postGreetAsync()">postGreetAsync</button>
+@*<img src="~/images/loading.gif" />*@
+<img id="animator" src="@Url.Content("~/images/loading.gif")" style="width:32px;height:32px;display:none;"/>
+
+
+<div id="result"></div>
+
+
+@section Scripts{
+    <script>
+        var baseaddress = "https://localhost:7191";
+
+       
+
+        function getGreetSync(){
+            //alert("getGreetSync");
+            var xmlHttp=new XMLHttpRequest();
+            if(xmlHttp!=null){
+                var p =encodeURI("Name=陳小明");
+                xmlHttp.open("GET", `${BaseAddress}/Ajax/Greet?${p}`,false);
+                document.getElementById("animator").style.display="inline";
+                //xmlHttp.timeout=5000;
+                xmlHttp.send();  //發送呼叫
+                document.getElementById("result").textContent=decodeURI(xmlHttp.responseText);
+                document.getElementById("animator").style.display="none";
+            }
+            else{
+                alert("瀏覽器不支援");
+            }
+        }
+        function getGreetAsync() {
+            //alert("getGreetAsync");
+            var xmlHttp = new XMLHttpRequest();
+            if (xmlHttp != null) {
+                var p = encodeURI("Name=陳小明");
+                xmlHttp.open("Get", `${BaseAddress}/Ajax/Greet?${p}`, true);
+                document.getElementById("animator").style.display = "inline";
+                //xmlHttp.timeout=5000;
+                xmlHttp.onreadystatechange=function(){
+                    if(xmlHttp.readyState==4){
+                        if(xmlHttp.status==200){
+                            document.getElementById("result").textContent = decodeURI(xmlHttp.responseText);
+                            document.getElementById("animator").style.display = "none";
+                        }
+                    }
+                }
+                xmlHttp.send();  //發送呼叫
+                
+            }
+            else {
+                alert("瀏覽器不支援");
+            }
+        }
+        function postGreetAsync() {
+            //alert("postGreetAsync");
+            var xmlHttp = new XMLHttpRequest();
+            if (xmlHttp != null) {
+                //var p = encodeURI("Name=陳小明");
+                xmlHttp.open("Post", `${BaseAddress}/Ajax/Greet`, true);
+                document.getElementById("animator").style.display = "inline";
+                //xmlHttp.timeout=5000;
+                xmlHttp.onreadystatechange = function () {
+                    if (xmlHttp.readyState == 4) {
+                        if (xmlHttp.status == 200) {
+                            document.getElementById("result").textContent = decodeURI(xmlHttp.responseText);
+                            document.getElementById("animator").style.display = "none";
+                        }
+                    }
+                }
+                xmlHttp.setRequestHeader("content-type","application/x-www-form-urlencoded");
+                xmlHttp.send("Name=陳小明");  //發送呼叫
+
+            }
+            else {
+                alert("瀏覽器不支援");
+            }
+        }
+    </script>
+}
+
+

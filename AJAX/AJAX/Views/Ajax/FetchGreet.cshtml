@@ -1,0 +1,82 @@
+﻿<button class="btn btn-primary" onclick="FetchGetGreetAsync()">FetchGetGreetAsync</button>
+<button class="btn btn-primary" onclick="FetchPostGreetAsync()">FetchPostGreetAsync</button>
+@*<img src="~/images/loading.gif" />*@
+<img id="animator" src="@Url.Content("~/images/loading.gif")" style="width:32px;height:32px;display:none;" />
+
+
+<div id="result"></div>
+
+
+@section Scripts{
+    <script>
+        var BaseAddress = "https://localhost:7191";
+
+
+
+        //////////////////
+        ///非同步Get
+        /////////////////
+
+        function FetchGetGreetAsync() {
+            //alert("FetchGetGreetAsync");
+            var p=encodeURI("Name=David");
+            $("#animator").show();
+            fetch(`${BaseAddress}/Ajax/Greet?${p}`, {
+                method:"Get"
+            }).then(function (result) {
+                if(result.ok){
+                    //return result.json();
+                    return result.text();
+                }
+            }).then(function (data) {
+                $("#animator").hide();
+                $("#result").text(data);
+
+
+            }).catch(function (err) {
+                $("#animator").hide();
+                alert("err");
+
+            });
+            
+
+        }
+
+        //////////////////
+        ///非同步Post
+        /////////////////
+
+        function FetchPostGreetAsync() {
+            //alert("FetchPostGreetAsync");
+            //var p = encodeURI("Name=David");
+            var data={
+                Name:"David"
+            };
+            $("#animator").show();
+            fetch(`${BaseAddress}/Ajax/FetchPostGreet`, {
+                method: "Post",
+                body:JSON.stringify(data),
+                headers:{
+                    'content-type':'application/json'
+                }
+            }).then(function (result) {
+                if (result.ok) {
+                    //return result.json();
+                    return result.text();
+                }
+            }).then(function (data) {
+                $("#animator").hide();
+                $("#result").text(data);
+
+
+            }).catch(function (err) {
+                $("#animator").hide();
+                alert("err");
+
+            });
+        }
+    </script>
+}
+
+
+

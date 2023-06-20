@@ -1,0 +1,20 @@
+﻿<button class="btn btn-primary" onclick="getEmployees()">getEmployees</button>
+
+
+@section Scripts{
+    <script>
+        var bassAddress = "https://localhost:7241";
+        function getEmployees(){
+            //alert("getEmployees");
+            $.ajax({
+                type:"GET",
+                url: `${bassAddress}/api/Employees`
+            }).done(function(data){
+                alert(data);
+            }).fail(function(err){
+                alert(`${err.statusText}`);
+            })
+        }
+
+    </script>
+}

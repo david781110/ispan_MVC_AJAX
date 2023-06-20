@@ -1,0 +1,53 @@
+﻿<div class="container">
+    <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input id="firstName" class="form-control" onkeyup="FetchCheckNameAsync()" />
+        <img id="animator" src="@Url.Content("~/images/loading.gif")" style="width:32px;height:32px;display:none;" />
+    </div>
+    <div class="form-group">
+
+        <button class="btn btn-primary" onclick="FetchCheckNameAsync()">FetchCheckNameAsync</button>
+    </div>
+    <div class="form-group">
+        <div id="result"></div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+
+        var BaseAddress = "https://localhost:7191";
+        function FetchCheckNameAsync() {
+            //alert("FetchCheckNameAsync");
+            var data = {
+                FirstName: $("#firstName").val()
+            };
+            $("#animator").show();
+            fetch(`${BaseAddress}/Ajax/FetchCheckName`, {
+                method: "Post",
+                body: JSON.stringify(data),
+                headers: {
+                    'content-type': 'application/json'
+                }
+            }).then(function (result) {
+                if (result.ok) {
+                    //return result.json();
+                    return result.text();
+                }
+            }).then(function (data) {
+                data == "true" ? $("#result").text("有此人") : $("#result").text("無此人")
+                $("#animator").hide();
+
+
+            }).catch(function (err) {
+                $("#animator").hide();
+                alert("err");
+
+            });
+
+
+
+        }
+    </script>
+}

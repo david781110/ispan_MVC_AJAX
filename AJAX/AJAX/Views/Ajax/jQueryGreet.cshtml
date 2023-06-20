@@ -1,0 +1,89 @@
+﻿<button class="btn btn-primary" onclick="jQueryGetGreetSync()">jQueryGetGreetSync</button>
+<button class="btn btn-primary" onclick="jQueryGetGreetAsync()">jQueryGetGreetAsync</button>
+<button class="btn btn-primary" onclick="jQueryPostGreetAsync()">jQueryPostGreetAsync</button>
+@*<img src="~/images/loading.gif" />*@
+<img id="animator" src="@Url.Content("~/images/loading.gif")" style="width:32px;height:32px;display:none;" />
+
+
+<div id="result"></div>
+
+
+@section Scripts{
+    <script>
+        var BaseAddress = "https://localhost:7191";
+
+
+        //////////////////
+        ///同步Get
+        /////////////////
+
+        function jQueryGetGreetSync() {
+            //alert("jQueryGetGreetSync");
+            var p = encodeURI("Name=劉小泰");
+            $("#animator").show();
+            $.ajax({
+                type:"Get",
+                timeout:5000,
+                url: `${BaseAddress}/Ajax/Greet?${p}`,
+                async:false
+
+            }).done(function (data) {
+                //alert(data);
+                $("#result").text(data);
+                $("#animator").hide();
+            }).fail(function (err) {
+                alert(err.statusText);
+                $("#animator").hide();
+            });
+
+        }
+
+        //////////////////
+        ///非同步Get
+        /////////////////
+
+        function jQueryGetGreetAsync() {
+            //alert("jQueryGetGreetAsync");
+            var p = encodeURI("Name=劉小泰");
+            $("#animator").show();
+            $.ajax({
+                type: "Get",
+                url: `${BaseAddress}/Ajax/Greet?${p}`,
+            }).done(function (data) {
+                //alert(data);
+                $("#result").text(data);
+                $("#animator").hide();
+            }).fail(function (err) {
+                alert(err.statusText);
+                $("#animator").hide();
+            });
+
+        }
+
+        //////////////////
+        ///非同步Post
+        /////////////////
+
+        function jQueryPostGreetAsync() {
+            //alert("jQueryPostGreetAsync");
+            //var p = encodeURI("Name=劉小泰");
+            $("#animator").show();
+            $.ajax({
+                type: "Post",
+                data:{
+                    Name: "劉小泰"
+                },
+                url: `${BaseAddress}/Ajax/Greet`
+            }).done(function (data) {
+                //alert(data);
+                $("#result").text(data);
+                $("#animator").hide();
+            }).fail(function (err) {
+                alert(err.statusText);
+                $("#animator").hide();
+            });
+        }
+    </script>
+}
+
+
