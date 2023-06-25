@@ -2454,19 +2454,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\davidliu\\.nuget\\packages\\": {}
+    "C:\\Users\\david\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\davidliu\\Desktop\\ispan_MVC_AJAX\\AJAX\\AJAX\\AJAX.csproj",
+      "projectUniqueName": "C:\\Users\\david\\Desktop\\ispan_MVC_AJAX\\AJAX\\AJAX\\AJAX.csproj",
       "projectName": "AJAX",
-      "projectPath": "C:\\Users\\davidliu\\Desktop\\ispan_MVC_AJAX\\AJAX\\AJAX\\AJAX.csproj",
-      "packagesPath": "C:\\Users\\davidliu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\davidliu\\Desktop\\ispan_MVC_AJAX\\AJAX\\AJAX\\obj\\",
+      "projectPath": "C:\\Users\\david\\Desktop\\ispan_MVC_AJAX\\AJAX\\AJAX\\AJAX.csproj",
+      "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\david\\Desktop\\ispan_MVC_AJAX\\AJAX\\AJAX\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\davidliu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\david\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2474,7 +2474,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2533,7 +2532,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -23,6 +23,15 @@ namespace AJAX.Controllers
             return View();
         }
 
+        public IActionResult PM25()
+        {
+            return View();
+        }
+
+        public IActionResult Rate()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

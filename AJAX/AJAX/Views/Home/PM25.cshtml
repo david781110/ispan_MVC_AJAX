@@ -1,0 +1,48 @@
+﻿@section Styles{
+    <link href="~/lib/datatables/css/jquery.datatables.min.css" rel="stylesheet" />
+    <style>
+        thead{
+            background-color:darkred;
+            color:white;
+        }
+    </style>
+}
+<table class="table table-striped table-hover">
+    <thead>
+
+        <tr>
+            <td>Site</td>
+            <td>County</td>
+            <td>PM2.5</td>
+            <td>Creationdate</td>
+        </tr>
+
+
+    </thead>
+</table>
+
+@section Scripts{
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="//cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("table").dataTable({
+                ajax:{
+                    type:"GET",
+                    url: "https://localhost:7191/pm2.5.json",
+                    dataSrc:function(json){return json["records"];}
+                },
+                columns:[
+                    { "data": "site", "width": "25%" },
+                    { "data": "county", "width": "25%" },
+                    { "data": "pm25", "width": "25%" },
+                    { "data": "datacreationdate", "width": "25%" },
+                    
+                ],
+                fixedHeader:{
+                    header:true
+                }
+            })
+        })
+    </script>
+}

@@ -154,3 +154,4 @@ C:\Users\david\Desktop\ispan_MVC_AJAX\AJAX\AJAX\obj\Debug\net6.0\refint\AJAX.dll
 C:\Users\david\Desktop\ispan_MVC_AJAX\AJAX\AJAX\obj\Debug\net6.0\AJAX.pdb
 C:\Users\david\Desktop\ispan_MVC_AJAX\AJAX\AJAX\obj\Debug\net6.0\AJAX.genruntimeconfig.cache
 C:\Users\david\Desktop\ispan_MVC_AJAX\AJAX\AJAX\obj\Debug\net6.0\ref\AJAX.dll
+C:\Users\david\Desktop\ispan_MVC_AJAX\AJAX\AJAX\bin\Debug\net6.0\libman.json
